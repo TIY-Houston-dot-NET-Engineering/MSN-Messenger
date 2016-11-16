@@ -1,0 +1,51 @@
+/*@import "../../node_modules/normalize.css/normalize.css";*/
+@import "../../node_modules/@blueprintjs/core/dist/blueprint.css";
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.grid {
+    font-size: 0;
+    text-align: justify;
+
+    & > * {
+        display: inline-block;
+        font-size: medium;
+        width: 100%;
+    }
+
+    &:after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+@define-mixin grid_r $col, $width, $margin=0 {
+        @media (min-width: $(width)px) {
+                .grid-$(col)-$(width) {
+                    & > * {
+                       width: calc(100 / $col)%;
+                }
+            }
+    }
+}
+@define-mixin grid_m $col, $width, $margin {
+        @media (min-width: $(width)px) {
+                .grid-$(col)-$(width) {
+                    & > * {
+                       width: calc(calc(100 / $col) - $margin)%;
+                }
+            }
+    }
+}
+
+@mixin grid_r 2, 400;
+@mixin grid_m 3, 600, 2;
+@mixin grid_r 4, 800;
+@mixin grid_r 6, 1000;
+
+body {
+    padding-top: 50px;
+}
