@@ -51,37 +51,11 @@ const Breadcrumbs = () =>
         )}
     </ul>
 
-const Card = ({title="IM DA BOSS", message="and you ain't", url="#"}) => 
+const Chatroom = ({name="IM DA BOSS", messages="Does this work?", url="#"}) => 
     <div className="pt-card pt-elevation-1 pt-interactive">
-        <h5><a href={url}>{title}</a></h5>
-        <p>{message}</p>
+        <h5><a href={url}>{name}</a></h5>
+        <p>{messages}</p>
     </div>
-
-const Table = () => 
-    <table className="pt-table pt-interactive pt-bordered">
-        <thead>
-            <th>Project</th>
-            <th>Description</th>
-            <th>Technologies</th>
-        </thead>
-        <tbody>
-            <tr>
-            <td>Blueprint</td>
-            <td>CSS framework and UI toolkit</td>
-            <td>Sass, TypeScript, React</td>
-            </tr>
-            <tr>
-            <td>TSLint</td>
-            <td>Static analysis linter for TypeScript</td>
-            <td>TypeScript</td>
-            </tr>
-            <tr>
-            <td>Plottable</td>
-            <td>Composable charting library built on top of D3</td>
-            <td>SVG, TypeScript, D3</td>
-            </tr>
-        </tbody>
-    </table>
 
 const Home = () => 
     <div>
@@ -90,20 +64,21 @@ const Home = () =>
         <hr />
         <div className="grid grid-3-600">
             {[
-                {title: "TEST TITLE", message: "TEST MESSAGE"},
-                {title: "TEST TITLE", message: "TEST MESSAGE"},
-                {title: "TEST TITLE", message: "TEST MESSAGE"}
-            ].map(x => [<Card {...x} />, " "] )}
+                {name: "TEST CHAT1", messages: ""},
+                {name: "TEST CHAT2", messages: ""},
+                {name: "TEST CHAT2", messages: ""}
+            ].map(x => [<Chatroom {...x} />, " "] )}
         </div>
         <div className="grid">
-            <Table />
         </div>
+        <button className="addChat">Create new Chatroom</button>
     </div>
 
 const reactApp = () => 
     render(
     <Router history={hashHistory}>
         <Route path="/" component={Home}/>
+        <Route path="/" component={CreateChatroom}/>
     </Router>,
     document.querySelector('.app'))
 

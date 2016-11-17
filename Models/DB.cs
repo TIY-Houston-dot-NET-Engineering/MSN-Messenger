@@ -17,7 +17,7 @@ public class DbFactory : IDbContextFactory<DB> {
             .Build();        
 
         var builder = new DbContextOptionsBuilder<DB>();
-        builder.UseNpgsql(config.GetConnectionString("Postgres:Dev"));
+        builder.UseNpgsql(config.GetConnectionString("Sqlite"));
         return new DB(builder.Options);
     }
 }
