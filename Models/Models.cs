@@ -17,7 +17,7 @@ public class Chatroom : HasId
     public int Id { get; set; }
     [Required]
     public string Name { get; set; } 
-    public List<Message> Messages { get; set; } = new List<Message>();
+    public virtual ICollection<Message> Messages { get; set; } 
     
 }
 public class Handle : HasId
@@ -26,6 +26,7 @@ public class Handle : HasId
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
+    public virtual ICollection<Message> Messages { get; set; } 
 }
 public class Message : HasId 
 {
@@ -34,10 +35,10 @@ public class Message : HasId
     [Required]
     [StringLength(250)]
     public string Text { get; set; }
-    public Handle Handle { get; set; }
     public int HandleId { get; set; }
-    public Chatroom Chatroom { get; set; }
+    public virtual Handle Handle { get; set; }
     public int ChatroomId { get; set; }
+    public virtual Chatroom Chatroom { get; set; }
     [Required]
     public DateTime createdAt { get; set; }
 }
@@ -55,7 +56,7 @@ public partial class Handler {
     public void RegisterRepos(IServiceCollection services){
         Repo<Handle>.Register(services, "Handles");
         Repo<Message>.Register(services, "Messages",
-            d => d.Include(h => h.Handle));
+        d => d.Include(h => h.Handle));
         Repo<Chatroom>.Register(services, "Chatrooms",
             d => d.Include(m => m.Messages).ThenInclude(h => h.Handle));
     }
