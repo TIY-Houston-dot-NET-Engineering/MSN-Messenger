@@ -17,6 +17,12 @@ public class HandleController : CRUDController<Handle> {
 [Route("/api/message")]
 public class MessageController : CRUDController<Message> {
     public MessageController(IRepository<Message> r) : base(r){}
+
+    [HttpGet("search")]
+    public IActionResult Search([FromQuery]string term, int listId = -1){
+        return Ok(r.Read(dbset => dbset.Where(message => 
+            message.Text.ToLower().IndexOf(term.ToLower()) != -1
+        )));
 }
 
 [Route("/api/chatroom")]
