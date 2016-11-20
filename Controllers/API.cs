@@ -23,7 +23,9 @@ public class MessageController : CRUDController<Message> {
         return Ok(r.Read(dbset => dbset.Where(message => 
             message.Text.ToLower().IndexOf(term.ToLower()) != -1
         )));
+    }
 }
+
 
 [Route("/api/chatroom")]
 public class ChatroomController : CRUDController<Chatroom> {
@@ -36,3 +38,4 @@ public class ChatroomController : CRUDController<Chatroom> {
         )));
     }
 }
+
