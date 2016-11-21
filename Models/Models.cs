@@ -20,7 +20,6 @@ public class Chatroom : HasId
     public virtual ICollection<Message> Messages { get; set; } 
     public int HandleId { get; set; }
     public virtual Handle Handle { get; set; }
-    public virtual ICollection<Handle> Handles { get; set; }
     
 }
 public class Handle : HasId
