@@ -18,7 +18,6 @@ public class Chatroom : HasId
     [Required]
     public string Name { get; set; } 
     public virtual ICollection<Message> Messages { get; set; } 
-    public virtual ICollection<Handle> Handles { get; set; }
     
 }
 public class Handle : HasId
@@ -28,7 +27,7 @@ public class Handle : HasId
     [Required]
     public string Name { get; set; }
     public virtual ICollection<Message> Messages { get; set; } 
-    public virtual ICollection<Chatroom> Chatrooms { get; set; }
+
 }
 public class Message : HasId 
 {
@@ -56,7 +55,7 @@ public partial class DB : IdentityDbContext<IdentityUser> {
 // create a Repo<T> services
 public partial class Handler {
     public void RegisterRepos(IServiceCollection services){
-       Repo<Handle>.Register(services, "HandleNames");
+       Repo<Handle>.Register(services, "Handles");
         Repo<Message>.Register(services, "Messages",
             d => d.Include(h => h.Handle.Name));
         Repo<Chatroom>.Register(services, "Chatrooms",
