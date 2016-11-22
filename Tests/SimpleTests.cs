@@ -3,11 +3,11 @@ using Xunit;
 namespace MsnTests
 {
 
-    public class CheckThisNumber
+    public class CheckThisChatroom
     {
         public int ChatroomId { get; set; }
     
-        public CheckThisNumber(int initialValue)
+        public CheckThisChatroom(int initialValue)
         {
             ChatroomId = initialValue;
         }
@@ -29,7 +29,7 @@ namespace MsnTests
 
         public void SampleChatroomIdTest(int number, bool expectedChatId)
         {
-            var possId = new CheckThisNumber(1);
+            var possId = new CheckThisChatroom(1);
             var result = possId.CheckIfEqual(number);
             Assert.Equal(result, expectedChatId);
         }
@@ -64,7 +64,37 @@ namespace MsnTests
             Assert.Equal(result, expectedHandleId);
         }
     }
-        
+
+    public class CheckThisMessage
+    {
+        public int MessageId { get; set; }
+
+        public CheckThisMessage (int HandleNum)
+        {
+            MessageId = HandleNum;
+        }
+
+        public bool CheckIfEqual (int input)
+        {
+            return MessageId == input;
+        }
+    }
+
+    public class MessageTests
+    {
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(2, true)]
+
+        public void SampleMessageIdTest(int number, bool expectedMessageId)
+        {
+            var possId = new CheckThisMessage(1);
+            var result = possId.CheckIfEqual(number);
+            Assert.Equal(result, expectedMessageId);
+        }
+    }   
+    
     public class PossTests
     {
          /* 
@@ -86,6 +116,7 @@ namespace MsnTests
         [InlineData( 1,1,2 )]
         [InlineData( 4,6,10 )]
         [InlineData( 7,7,14 )]
+        
         public void TestingAdd3(int a, int b, int c) =>
             Assert.Equal(Add(a,b), c);
 
